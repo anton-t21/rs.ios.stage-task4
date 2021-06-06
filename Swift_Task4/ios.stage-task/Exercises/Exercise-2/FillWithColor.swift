@@ -4,7 +4,7 @@ final class FillWithColor {
     
     func fillWithColor(_ image: [[Int]], _ row: Int, _ column: Int, _ newColor: Int) -> [[Int]] {
 
-        if row > image.count - 1 || column > image[0].count - 1 || newColor > 65536 || image.count < 1 || image[0].count > 50 {
+        if image.count == 0 || row > image.count - 1 || column < 1 || column > image[0].count - 1 || newColor > 65536 || image.count < 1 || image[0].count > 50 {
             return image
         }
         else {
