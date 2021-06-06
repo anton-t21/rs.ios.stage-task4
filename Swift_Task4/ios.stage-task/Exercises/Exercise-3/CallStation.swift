@@ -24,7 +24,8 @@ extension CallStation: Station {
         for element in callsArray {
             if element.incomingUser == user || element.outgoingUser == user {
                 if element.status == .calling || element.status == .talk {
-                    callsArray[i].status = .ended(reason: .error)               }
+                    callsArray[i].status = .ended(reason: .error)
+                }
             }
             i += 1
         }
