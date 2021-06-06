@@ -9,39 +9,43 @@ final class FillWithColor {
         }
         else {
             let oldColor = image[row][column]
-            var queue = [(row,column)]
-            var newImage = image
+            if oldColor != newColor {
+                var queue = [(row,column)]
+                var newImage = image
 
-            while !queue.isEmpty {
-                let coord = queue[0]
-                queue.remove(at: 0)
-                newImage[coord.0][coord.1] = newColor
-                if coord.0 < newImage.count - 1 {
-                    if newImage[coord.0 + 1][coord.1] == oldColor {
-                        newImage[coord.0 + 1][coord.1] = newColor
-                        queue.append((coord.0 + 1, coord.1))
+                while !queue.isEmpty {
+                    let coord = queue[0]
+                    queue.remove(at: 0)
+                    newImage[coord.0][coord.1] = newColor
+                    if coord.0 < newImage.count - 1 {
+                        if newImage[coord.0 + 1][coord.1] == oldColor {
+                            newImage[coord.0 + 1][coord.1] = newColor
+                            queue.append((coord.0 + 1, coord.1))
+                        }
+                    }
+                    if coord.1 < newImage[0].count - 1 {
+                        if newImage[coord.0][coord.1 + 1] == oldColor {
+                            newImage[coord.0][coord.1 + 1] = newColor
+                            queue.append((coord.0, coord.1 + 1))
+                        }
+                    }
+                    if coord.0 > 0 {
+                        if newImage[coord.0 - 1][coord.1] == oldColor {
+                            newImage[coord.0 - 1][coord.1] = newColor
+                            queue.append((coord.0 - 1, coord.1))
+                        }
+                    }
+                    if coord.1 > 0 {
+                        if newImage[coord.0][coord.1 - 1] == oldColor {
+                            newImage[coord.0][coord.1 - 1] = newColor
+                            queue.append((coord.0, coord.1 - 1))
+                        }
                     }
                 }
-                if coord.1 < newImage[0].count - 1 {
-                    if newImage[coord.0][coord.1 + 1] == oldColor {
-                        newImage[coord.0][coord.1 + 1] = newColor
-                        queue.append((coord.0, coord.1 + 1))
-                    }
-                }
-                if coord.0 > 0 {
-                    if newImage[coord.0 - 1][coord.1] == oldColor {
-                        newImage[coord.0 - 1][coord.1] = newColor
-                        queue.append((coord.0 - 1, coord.1))
-                    }
-                }
-                if coord.1 > 0 {
-                    if newImage[coord.0][coord.1 - 1] == oldColor {
-                        newImage[coord.0][coord.1 - 1] = newColor
-                        queue.append((coord.0, coord.1 - 1))
-                    }
-                }
+                return newImage
+            } else {
+                return image
             }
-            return newImage
         }
     }
 }
